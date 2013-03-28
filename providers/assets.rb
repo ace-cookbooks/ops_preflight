@@ -9,7 +9,7 @@ action :install do
   Chef::Log.debug("rails_env = #{rails_env}") rescue nil
 
   execute "ops_preflight download bundle" do
-    command "bundle exec preflight-server download -b #{node[:preflight][:bucket]} -f #{release_path}/tmp/preflight-#{app_name}-bundle-#{rails_env}.tgz"
+    command "/usr/local/bin/preflight-server download -b #{node[:preflight][:bucket]} -f #{release_path}/tmp/preflight-#{app_name}-bundle-#{rails_env}.tgz"
     cwd release_path
     user "deploy"
     group "opsworks"
@@ -23,7 +23,7 @@ action :install do
   end
 
   execute "ops_preflight download assets" do
-    command "bundle exec preflight-server download -b #{node[:preflight][:bucket]} -f #{release_path}/tmp/preflight-#{app_name}-assets-#{rails_env}.tgz"
+    command "/usr/local/bin/preflight-server download -b #{node[:preflight][:bucket]} -f #{release_path}/tmp/preflight-#{app_name}-assets-#{rails_env}.tgz"
     cwd release_path
     user "deploy"
     group "opsworks"
