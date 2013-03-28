@@ -30,7 +30,7 @@ if node[:preflight][:users] && !node[:preflight][:users].empty?
   end
 
   template "/home/#{username}/.ssh/authorized_keys" do
-    cookbook 'opsworks_preflight'
+    cookbook 'ops_preflight'
     source 'authorized_keys.erb'
     owner username
     group 'opsworks'
