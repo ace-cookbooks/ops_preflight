@@ -11,7 +11,7 @@ action :install do
   directory "#{node[:deploy][app_name][:home]}/.bundler/#{app_name}" do
     owner 'deploy'
     group 'opsworks'
-    mode 00644
+    mode 00755
     recursive true
     action :create
   end

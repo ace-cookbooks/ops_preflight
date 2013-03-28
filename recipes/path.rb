@@ -2,7 +2,7 @@ if node[:preflight][:path]
   directory node[:preflight][:path] do
     owner node[:preflight][:login_user]
     group "opsworks"
-    mode 00644
+    mode 00755
     action :create
   end
 
