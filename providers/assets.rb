@@ -8,6 +8,13 @@ action :install do
   Chef::Log.debug("release_path = #{release_path}") rescue nil
   Chef::Log.debug("rails_env = #{rails_env}") rescue nil
 
+  directory "#{node[:deploy][app_name][:home]}/.bundler/#{app_name}" do
+    owner 'deploy'
+    group 'opsworks'
+    mode 00644
+    action :create
+  end
+
   execute "ops_preflight download bundle" do
     command "/usr/local/bin/preflight-server download -b #{node[:preflight][:bucket]} -f #{release_path}/tmp/preflight-#{app_name}-bundle-#{rails_env}.tgz"
     cwd release_path
