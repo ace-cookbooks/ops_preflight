@@ -16,7 +16,7 @@ action :install do
   end
 
   execute "ops_preflight extract bundle" do
-    command "tar -zxvf #{release_path}/tmp/preflight-#{app_name}-bundle-#{rails_env}.tgz -C #{node[:deploy][app_name][:home]}/.bundler/#{app_name} --strip-components=1"
+    command "tar -zxvf #{release_path}/tmp/preflight-#{app_name}-bundle-#{rails_env}.tgz -C #{node[:deploy][app_name][:home]}/.bundler/#{app_name} --strip-components=1 > /dev/null"
     cwd release_path
     user "deploy"
     group "opsworks"
@@ -30,7 +30,7 @@ action :install do
   end
 
   execute "ops_preflight extract assets" do
-    command "tar -zxvf #{release_path}/tmp/preflight-#{app_name}-assets-#{rails_env}.tgz -C #{release_path}/public"
+    command "tar -zxvf #{release_path}/tmp/preflight-#{app_name}-assets-#{rails_env}.tgz -C #{release_path}/public > /dev/null"
     cwd release_path
     user "deploy"
     group "opsworks"
