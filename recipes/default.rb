@@ -44,3 +44,9 @@ if node[:preflight][:users] && !node[:preflight][:users].empty?
 else
   Chef::Log.warn "Preflight setup requested but no preflight users specified."
 end
+
+gem_package 'ops_preflight' do
+  version node[:preflight][:gem_version]
+  action :nothing
+end.run_action(:install)
+Gem.clear_paths
