@@ -12,6 +12,7 @@ action :install do
     owner 'deploy'
     group 'opsworks'
     mode 00644
+    recursive true
     action :create
   end
 
