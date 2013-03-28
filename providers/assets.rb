@@ -31,7 +31,12 @@ action :install do
   end
 
   # Run bundler to get binstubs
-  OpsWorks::RailsConfiguration.bundle(app_name, node[:deploy][app_name], release_path)
+  ruby_block "run_bundler" do
+    block do
+      OpsWorks::RailsConfiguration.bundle(app_name, node[:deploy][app_name], release_path)
+    end
+    action :create
+  end
 
   execute "ops_preflight download assets" do
     command "/usr/local/bin/preflight-server download -b #{node[:preflight][:bucket]} -f #{release_path}/tmp/preflight-#{app_name}-assets-#{rails_env}.tgz"
