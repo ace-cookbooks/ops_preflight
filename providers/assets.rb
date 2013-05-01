@@ -17,7 +17,7 @@ action :install do
   end
 
   execute "ops_preflight download bundle" do
-    command "/usr/local/bin/preflight-server download -b #{node[:preflight][:bucket]} -f #{release_path}/tmp/preflight-#{app_name}-bundle-#{rails_env}.tgz"
+    command "/usr/bin/preflight-server download -b #{node[:preflight][:bucket]} -f #{release_path}/tmp/preflight-#{app_name}-bundle-#{rails_env}.tgz"
     cwd release_path
     user "deploy"
     group "opsworks"
@@ -39,7 +39,7 @@ action :install do
   end
 
   execute "ops_preflight download assets" do
-    command "/usr/local/bin/preflight-server download -b #{node[:preflight][:bucket]} -f #{release_path}/tmp/preflight-#{app_name}-assets-#{rails_env}.tgz"
+    command "/usr/bin/preflight-server download -b #{node[:preflight][:bucket]} -f #{release_path}/tmp/preflight-#{app_name}-assets-#{rails_env}.tgz"
     cwd release_path
     user "deploy"
     group "opsworks"
