@@ -1,6 +1,6 @@
-node[:preflight][:login_user] = case node[:platform]
+node.default[:preflight][:login_user] = case node[:platform]
                                 when 'ubuntu'
-                                  username = 'ubuntu'
+                                  'ubuntu'
                                 when 'amazon'
-                                  username = 'ec2-user'
+                                  'ec2-user'
                                 end
