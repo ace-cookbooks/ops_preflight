@@ -2,5 +2,4 @@ gem_package 'ops_preflight' do
   version node[:preflight][:gem_version]
   gem_binary '/usr/bin/gem'
   action :nothing
-end.run_action(:install)
-Gem.clear_paths
+end
