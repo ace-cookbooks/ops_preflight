@@ -30,14 +30,6 @@ action :install do
     group "opsworks"
   end
 
-  # Force bundler to run as if --deployment was passed
-  execute "freeze bundle" do
-    command "/usr/local/bin/bundle config --local frozen 1"
-    cwd release_path
-    user "deploy"
-    group "opsworks"
-  end
-
   # Run bundler to get binstubs
   rails_bundle app_name do
     app_config node[:deploy][app_name]
