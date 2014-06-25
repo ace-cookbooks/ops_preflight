@@ -1,3 +1,5 @@
+require 'yaml'
+
 action :install do
   app_name = new_resource.app_name
   release_path = new_resource.release_path
@@ -8,17 +10,15 @@ action :install do
   Chef::Log.debug("release_path = #{release_path}") rescue nil
   Chef::Log.debug("rails_env = #{rails_env}") rescue nil
 
-  app_vars = node[:env_vars][app_name][rails_env] rescue {}
+  app_vars = node[:env_vars][app_name] rescue {}
 
   if app_vars && !app_vars.empty?
     Chef::Log.debug("Installing env file for #{rails_env}")
-    template "#{release_path}/.env.#{rails_env}" do
-      cookbook "ops_preflight"
-      source "env.erb"
+    file "#{release_path}/config/application.yml" do
       mode "0660"
       owner node[:deploy][app_name][:user]
       group node[:deploy][app_name][:group]
-      variables(:env_vars => app_vars)
+      content app_vars.to_yaml
     end
   end
 
