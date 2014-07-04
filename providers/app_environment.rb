@@ -18,7 +18,7 @@ action :install do
       mode "0660"
       owner node[:deploy][app_name][:user]
       group node[:deploy][app_name][:group]
-      content app_vars.to_yaml
+      content app_vars.to_hash.to_yaml
     end
   end
 
